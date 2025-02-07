@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:myproject/SplashScreen.dart';
 import 'package:myproject/data/dbHelper.dart';
 
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: SplashScreen(),
   ));
 }
 
@@ -40,8 +41,13 @@ class _MyApp extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My App"),
-        backgroundColor: Colors.amber,
+        centerTitle: true,
+        title: Text(
+          "My App",
+          style: TextStyle(
+              color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.blue,
       ),
       body: Center(
           child: allNotes.isNotEmpty
@@ -102,7 +108,7 @@ class _MyApp extends State<MyApp> {
         builder: (context) {
           return Container(
             padding: EdgeInsets.all(14),
-            height: 400,
+            height: 600,
             width: double.infinity,
             child: Column(
               spacing: 8,
@@ -115,25 +121,28 @@ class _MyApp extends State<MyApp> {
                   controller: title,
                   decoration: InputDecoration(
                       hintText: "Enter Title",
-                      labelText: isUpdate ? title.text : "title",
+                      labelText: "Title",
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 1),
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.orange, width: 1))),
+                              BorderSide(color: Colors.blue, width: 1))),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 TextField(
                   controller: description,
                   decoration: InputDecoration(
                       hintText: "Enter Description",
-                      labelText: isUpdate ? description.text : "description",
+                      labelText: "Description",
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 1),
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.orange, width: 1))),
+                              BorderSide(color: Colors.blue, width: 1))),
                 ),
                 ElevatedButton(
                     onPressed: () async {
@@ -146,7 +155,14 @@ class _MyApp extends State<MyApp> {
                       getNotes();
                       Navigator.pop(context);
                     },
-                    child: Text(isUpdate ? "Edit" : "Submit"))
+                    style: ButtonStyle(
+                      backgroundColor:
+                          WidgetStateProperty.all<Color>(Colors.blue),
+                    ),
+                    child: Text(
+                      isUpdate ? "Edit" : "Submit",
+                      style: TextStyle(color: Colors.white),
+                    ))
               ],
             ),
           );
